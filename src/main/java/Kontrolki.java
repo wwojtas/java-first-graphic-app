@@ -34,7 +34,7 @@ public class Kontrolki extends Application {
         // HEX color
         Color color = Color.web("#0f0000");
 
-        // Label - nazwa kontrolki
+        // Label - nazwa kontrolki  ========================================
         Label label = new Label("Moja pierwsza labelka");
         label.setLayoutX(10);
         label.setLayoutX(35);
@@ -46,7 +46,7 @@ public class Kontrolki extends Application {
         label.setWrapText(true);
 //        label.setRotate(15); // obrocenie tekstu
 
-        // ImageView
+        // ImageView - ======================================================
         Image image = new Image("email.jpg");
         ImageView imageView = new ImageView(image);
 //        label.setGraphic(imageView); // jesli label tu - to wyłącz w group.getChildren().add(imageView);
@@ -57,7 +57,7 @@ public class Kontrolki extends Application {
         imageView.setFitWidth(200);
         imageView.setPreserveRatio(true); // równomierne rozciąganie obrazka
 
-        // Button
+        // Button - ===================================================
         Button button = new Button("Mój pierwszy przycisk");
         button.setText("Przycisk - text zmieniony");
         button.setLayoutX(20);
@@ -79,7 +79,7 @@ public class Kontrolki extends Application {
             }
         });
 
-        // TextField
+        // TextField - ===================================================
         TextField textField = new TextField();
 //        textField.setText("nowy tekst");
         textField.setPromptText("Wpisz email");
@@ -87,7 +87,7 @@ public class Kontrolki extends Application {
         textField.setLayoutX(20);
         textField.setLayoutY(140);
 
-        // PaswordField
+        // PaswordField - ===================================================
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Wpisz haslo");
         passwordField.setPrefColumnCount(20); // max. 20 znaków
@@ -104,13 +104,13 @@ public class Kontrolki extends Application {
             }
         });
 
-        // TextArea
+        // TextArea - ===================================================
         TextArea textArea = new TextArea();
         textArea.setPromptText("textarea");
         textArea.setLayoutX(20);
         textArea.setLayoutY(210);
 
-        // Checkbox
+        // Checkbox - ===================================================
         CheckBox checkBox = new CheckBox("Nacisnij checkobx");
 //        checkBox.setText("Nacisnij checkobx"); // opcjonalnie
         checkBox.setLayoutX(300);
@@ -119,7 +119,7 @@ public class Kontrolki extends Application {
         checkBox.isSelected(); // metoda sprawdza czy checkbox zaznaczony
 
 
-        // radioButton
+        // radioButton - ===================================================
         RadioButton radioButton1 = new RadioButton("Radiobutton 1");
         RadioButton radioButton2 = new RadioButton("Radiobutton 2");
 
