@@ -1,11 +1,13 @@
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -108,6 +110,43 @@ public class Kontrolki extends Application {
         textArea.setLayoutX(20);
         textArea.setLayoutY(210);
 
+        // Checkbox
+        CheckBox checkBox = new CheckBox("Nacisnij checkobx");
+//        checkBox.setText("Nacisnij checkobx"); // opcjonalnie
+        checkBox.setLayoutX(300);
+        checkBox.setLayoutY(20);
+        checkBox.setSelected(true); // domyslnie zaznaczony
+        checkBox.isSelected(); // metoda sprawdza czy checkbox zaznaczony
+
+
+        // radioButton
+        RadioButton radioButton1 = new RadioButton("Radiobutton 1");
+        RadioButton radioButton2 = new RadioButton("Radiobutton 2");
+
+        radioButton1.setLayoutX(300);
+        radioButton1.setLayoutY(40);
+//        radioButton1.setSelected(true); // stale zaznaczony
+//        radioButton1.isSelected(); - czy jest zaznaczony
+
+        radioButton2.setLayoutX(300);
+        radioButton2.setLayoutY(70);
+
+        // radioButton - ustawiamy grupe dla Radio Buttonow
+        ToggleGroup toggleGroup = new ToggleGroup();
+        radioButton1.setToggleGroup(toggleGroup);
+        radioButton2.setToggleGroup(toggleGroup);
+
+        // radioButton - nasluchiwanie
+        toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+            @Override
+            public void changed(ObservableValue<? extends Toggle> observable, Toggle oldValue, Toggle newValue) {
+                RadioButton wybrany = (RadioButton) newValue;
+                System.out.println("Wybrany: " + wybrany.getText());
+            }
+        });
+
+
+
 
 
 
@@ -120,6 +159,9 @@ public class Kontrolki extends Application {
         group.getChildren().add(textField);
         group.getChildren().add(passwordField);
         group.getChildren().add(textArea);
+        group.getChildren().add(checkBox);
+        group.getChildren().add(radioButton1);
+        group.getChildren().add(radioButton2);
 
         Scene scene = new Scene(group, 800, 600, Color.ANTIQUEWHITE);
 
