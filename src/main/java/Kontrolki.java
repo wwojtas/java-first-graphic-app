@@ -5,6 +5,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -74,6 +76,31 @@ public class Kontrolki extends Application {
             }
         });
 
+        // TextField
+        TextField textField = new TextField();
+//        textField.setText("nowy tekst");
+        textField.setPromptText("Wpisz email");
+        textField.setPrefColumnCount(20);
+        textField.setLayoutX(20);
+        textField.setLayoutY(140);
+
+        // PaswordField
+        PasswordField passwordField = new PasswordField();
+        passwordField.setPromptText("Wpisz haslo");
+        passwordField.setPrefColumnCount(20); // max. 20 znaków
+        passwordField.setLayoutX(20);
+        passwordField.setLayoutY(180);
+
+        // pobranie treście z pola PasswordField
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Wpisałes w PaswordField: ");
+                String tekst = passwordField.getText();
+                System.out.println(tekst);
+            }
+        });
+
 
 
 
@@ -83,6 +110,8 @@ public class Kontrolki extends Application {
         group.getChildren().add(imageView);
 //        group.getChildren().add(labelWithImage);
         group.getChildren().add(button);
+        group.getChildren().add(textField);
+        group.getChildren().add(passwordField);
 
         Scene scene = new Scene(group, 800, 600, Color.ANTIQUEWHITE);
 
