@@ -1,6 +1,9 @@
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.ImageView;
 import javafx.scene.paint.Color;
@@ -49,6 +52,27 @@ public class Kontrolki extends Application {
         imageView.setFitWidth(200);
         imageView.setPreserveRatio(true); // równomierne rozciąganie obrazka
 
+        // Button
+        Button button = new Button("Mój pierwszy przycisk");
+        button.setText("Przycisk - text zmieniony");
+        button.setLayoutX(20);
+        button.setLayoutY(100);
+        button.setTextFill(Color.GREEN);
+//        button.setGraphic(imageView);
+//        button.setDisable(true); // właczanie przycisku
+        button.setMaxWidth(500);
+        button.setWrapText(true);
+
+        // reakcja po kliknięciu w button
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                System.out.println("Kliknales button");
+                String tekst = button.getText() + " kliknalem";
+                button.setText(tekst);
+                button.setDisable(true);
+            }
+        });
 
 
 
@@ -58,6 +82,7 @@ public class Kontrolki extends Application {
         group.getChildren().add(label);
         group.getChildren().add(imageView);
 //        group.getChildren().add(labelWithImage);
+        group.getChildren().add(button);
 
         Scene scene = new Scene(group, 800, 600, Color.ANTIQUEWHITE);
 
