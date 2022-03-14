@@ -34,14 +34,14 @@ public class Kontrolki extends Application {
         // HEX color
         Color color = Color.web("#0f0000");
 
-        // Label - nazwa kontrolki  ========================================
+        // Label - nazwa dla kontrolki  ========================================
         Label label = new Label("Moja pierwsza labelka");
         label.setLayoutX(10);
         label.setLayoutX(35);
 //        label.setFont(new Font(20));
         label.setFont(font);
 //        label.setTextFill(Color.RED); // kolor z palety
-        label.setTextFill(color); // kolor włąsny dedykowany
+        label.setTextFill(color); // kolor własny dedykowany
         label.setMaxWidth(80);
         label.setWrapText(true);
 //        label.setRotate(15); // obrocenie tekstu
@@ -87,6 +87,7 @@ public class Kontrolki extends Application {
         textField.setLayoutX(20);
         textField.setLayoutY(140);
 
+
         // PaswordField - ===================================================
         PasswordField passwordField = new PasswordField();
         passwordField.setPromptText("Wpisz haslo");
@@ -94,7 +95,7 @@ public class Kontrolki extends Application {
         passwordField.setLayoutX(20);
         passwordField.setLayoutY(180);
 
-        // pobranie treście z pola PasswordField
+        // pobranie treści z pola PasswordField
         button.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
@@ -109,6 +110,7 @@ public class Kontrolki extends Application {
         textArea.setPromptText("textarea");
         textArea.setLayoutX(20);
         textArea.setLayoutY(210);
+        textArea.setMaxWidth(200);
 
         // Checkbox - ===================================================
         CheckBox checkBox = new CheckBox("Nacisnij checkobx");
@@ -124,7 +126,7 @@ public class Kontrolki extends Application {
         RadioButton radioButton2 = new RadioButton("Radiobutton 2");
 
         radioButton1.setLayoutX(300);
-        radioButton1.setLayoutY(40);
+        radioButton1.setLayoutY(45);
 //        radioButton1.setSelected(true); // stale zaznaczony
 //        radioButton1.isSelected(); - czy jest zaznaczony
 
@@ -145,12 +147,90 @@ public class Kontrolki extends Application {
             }
         });
 
+        // ChoiceBox - rozwijany- =================================================
+        String[] listaWyborow = {"Pierwszy ChoiceBox", "Drugi ChoiceBox", "Trzeci ChoiceBox", "Czwarty ChoiceBox"};
 
+        ChoiceBox<String> choiceBox = new ChoiceBox<>();
+        choiceBox.setLayoutX(300);
+        choiceBox.setLayoutY(100);
+        choiceBox.getItems().addAll(listaWyborow);
+
+        // nasłuciwanie ChoiceBox
+        choiceBox.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                String wybor = listaWyborow[newValue.intValue()];
+                System.out.println("Wybor z choiceBox: " + wybor);
+            }
+        });
+
+
+        // ListView - =================================================
+        ListView<String> listView = new ListView<>();
+        listView.getItems().addAll(listaWyborow); // dodanie listy do naszego listView
+        listView.setLayoutX(300);
+        listView.setLayoutY(130);
+        listView.setMaxHeight(200);
+        listView.setMaxHeight(100);
+        listView.getSelectionModel().selectedIndexProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                String wybor = listaWyborow[newValue.intValue()]; // odwolujemy sie do indeksu
+                System.out.println("Wybrany z listView: " + wybor);
+            }
+        });
+
+
+        // ProgressBar - =================================================
+        ProgressBar progressBar = new ProgressBar();
+        progressBar.setLayoutX(300);
+        progressBar.setLayoutY(230);
+        progressBar.setProgress(0.7); // ustawianie progresu
+
+
+        // ProgressIndicator - =================================================
+        ProgressIndicator progressIndicator = new ProgressIndicator();
+//        ProgressIndicator progressIndicator = new ProgressIndicator(0.9); // stan ustawiony w konstruktorze
+        progressIndicator.setLayoutX(300);
+        progressIndicator.setLayoutY(250);
+        progressIndicator.setProgress(0.3);
+
+        // Slider - =================================================
+        Slider slider = new Slider(0,100, 0);
+        slider.setLayoutX(300);
+        slider.setLayoutY(300);
+        slider.setPrefWidth(200);
+//        slider.setMin(0); // wartosc ustawione w konstruktorze
+//        slider.setMax(100);
+//        slider.setValue(10);
+        slider.setShowTickMarks(true); // podziałka
+        slider.setShowTickLabels(true); // wartosci na podzialce
+        slider.setMajorTickUnit(25); // wartosci co jaka wartosc
+        slider.setMinorTickCount(4); // odleglosc miedzy tickami-podziałkami
+        slider.setSnapToTicks(true); // przy przesuwaniu slider "wpada" w ticki
+
+        slider.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> observable, Number oldValue, Number newValue) {
+                System.out.println("Slider: " + newValue.intValue());
+                if(newValue.intValue() == 100) {
+                    progressBar.setVisible(false);  // Chowanie kontrolek
+                    progressIndicator.setVisible(false);  // Chowanie kontrolek
+                } else {
+                    double valuePercent = newValue.doubleValue() / 100.0;
+                    progressBar.setProgress(valuePercent);
+                    progressIndicator.setProgress(valuePercent);
+                    progressBar.setVisible(true);  // Pokazanie kontrolek
+                    progressIndicator.setVisible(true);  // Pokazanie kontrolek
+                }
+            }
+        });
 
 
 
 
         ////////////////////////////////////////////////
+        // Group - grupowanie widoku
         Group group = new Group();
         group.getChildren().add(label);
         group.getChildren().add(imageView);
@@ -162,6 +242,11 @@ public class Kontrolki extends Application {
         group.getChildren().add(checkBox);
         group.getChildren().add(radioButton1);
         group.getChildren().add(radioButton2);
+        group.getChildren().add(choiceBox);
+        group.getChildren().add(listView);
+        group.getChildren().add(progressBar);
+        group.getChildren().add(progressIndicator);
+        group.getChildren().add(slider);
 
         Scene scene = new Scene(group, 800, 600, Color.ANTIQUEWHITE);
 
